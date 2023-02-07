@@ -22,6 +22,7 @@ function SearchMovies({ getData }) {
     getData(search);
     setSearch('');
   }
+
   return (
     <>
       <form onSubmit={onSubmitHandler}>
@@ -33,6 +34,7 @@ function SearchMovies({ getData }) {
         ></input>
         <button type="submit">Search</button>
       </form>
+
       {showModal && (
         <section className="alert-message-section">
           <section>
