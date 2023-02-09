@@ -52,7 +52,6 @@ function SearchMovies() {
         <input
           placeholder="Search movie"
           value={search}
-          // value={search}
           onChange={onChangeHandler}
         ></input>
         <button type="submit">Search</button>

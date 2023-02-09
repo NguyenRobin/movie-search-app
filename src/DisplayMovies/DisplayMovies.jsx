@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './DisplayMovies.css';
 function DisplayMovies({ movies }) {
