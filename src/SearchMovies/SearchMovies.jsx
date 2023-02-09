@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import DisplayMovies from '../DisplayMovies/DisplayMovies';
 import './SearchMovies.css';
-function SearchMovies({ getData }) {
+function SearchMovies() {
   const [search, setSearch] = useState('');
+  const [movies, setMovies] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const API_KEY = '37fe945a';
+  const URL = `http://www.omdbapi.com/?apikey=${API_KEY}&`;
+
+  async function getMovies(movie) {
+    try {
+      const response = await fetch(`${URL}s=${movie}`);
+      if (!response.ok) throw new Error('Problem getting data!⛔️');
+      const data = await response.json();
+      if (data.Response === 'False') {
+        setShowModal(true);
+        return;
+      }
+      console.log(data);
+      setMovies(data.Search);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    getMovies('pippi');
+  }, []);
+
   function onChangeHandler(event) {
-    // console.log(event.target.value);
     setSearch(event.target.value);
   }
 
@@ -19,7 +42,7 @@ function SearchMovies({ getData }) {
     }
 
     setShowModal(false);
-    getData(search);
+    getMovies(search);
     setSearch('');
   }
 
@@ -34,6 +57,8 @@ function SearchMovies({ getData }) {
         ></input>
         <button type="submit">Search</button>
       </form>
+
+      <DisplayMovies movies={movies} />
 
       {showModal && (
         <section className="alert-message-section">
