@@ -10,6 +10,6 @@ function DisplayMovies({ movies }) {
       key={Math.random() * index}
     />
   ));
-  return <section className="movie-section">{movieList}</section>;
+  return <ul className="movie-section">{movieList}</ul>;
 }
 export default DisplayMovies;
